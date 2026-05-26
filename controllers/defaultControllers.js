@@ -59,7 +59,7 @@ const index = async (req, res) => {
         message: req.cookies.flash,
         type: 'error'
     };
-        res.clearCookie('flash');
+    res.clearCookie('flash');
     try {
         const filter = req.query.filter;
         const bruker = await findUser(req)
@@ -67,7 +67,7 @@ const index = async (req, res) => {
         let results;
 
         if(!filter || filter == '') {
-            results = await Hendelse.find()
+            results = await Hendelse.find().sort({opprettelseDato: -1})
         } else {
             results = await Hendelse.find({ tema: filter });
         }

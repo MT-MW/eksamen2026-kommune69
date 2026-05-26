@@ -1,0 +1,62 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<form class="createForm" action="/ny-hendelse" method="post">
+
+    <h1>Registrer ny hendelse</h1>
+
+    <div>
+        <label for="title"><p>Tittel:</p></label>
+        <input type="text" id="title" name="title" required>
+    </div>
+
+    <div>
+        <label for="description"><p>Beskrivelse:</p></label>
+        <textarea name="description" id="description" required></textarea>
+    </div>
+
+    <div>
+        <div>
+            <label for="theme"><p>Tema:</p></label>
+            <select name="theme" id="theme">
+                <% tema.forEach(tema => { %>
+                    <option value="<%= tema %>">
+                        <%= tema %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+        <div>
+            <label for="priority"><p>Prioritet:</p></label>
+            <select name="priority" id="priority">
+                <% prioritet.forEach(prioritet => { %>
+                    <option value="<%= prioritet %>">
+                        <%= prioritet %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>        
+    </div>
+
+    <div>
+        <label for="personResponsible"><p>Ansvarlig Person:</p></label>
+        <select name="personResponsible" id="personResponsible">
+            <% brukere.forEach(bruker => { %>
+                <option value="<%= bruker._id %>">
+                    <p><%= bruker.fornavn %> <%= bruker.etternavn %></p>
+                </option>
+            <% }) %>
+        </select>
+    </div>
+
+    <div>
+        <%- include('./partials/flashMessage.ejs') %>
+    </div>
+
+    <button class="actionButton" type="submit">
+        <h3>Registrer ny hendelse</h3>
+    </button>
+
+</form>
+
+<%- include('./partials/foot.ejs') %>

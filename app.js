@@ -10,6 +10,7 @@ const app = express();
 const dbHandler = require('./handlers/dbHandler');
 
 //require routes
+const hendelseRoutes = require('./routes/hendelseRoutes');
 const userRoutes = require('./routes/userRoutes');
 const defaultRoutes = require('./routes/defaultRoutes');
 
@@ -29,6 +30,7 @@ app.listen(process.env.PORT, async () => {
 });
 
 //routes
+app.use('/', hendelseRoutes);
 app.use('/', userRoutes);
 app.use('/', defaultRoutes);
 
