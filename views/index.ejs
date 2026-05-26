@@ -3,18 +3,21 @@
 
 <h1>Logg Inn</h1>
 
-<form action="/" method="post">
+<form action="/logg-inn" method="post">
     <div>
         <label for="firstname">Fornavn:</label>
         <input type="text" id="firstname" name="firstname">
     </div>
     <div>
-        <label for="lastname">Fornavn:</label>
+        <label for="lastname">Etternavn:</label>
         <input type="text" id="lastname" name="lastname">
     </div>
     <div>
-        <label for="password">Fornavn:</label>
+        <label for="password">Passord:</label>
         <input type="password" id="password" name="password">
+    </div>
+    <div>
+        <%- include('./partials/flashMessage.ejs') %>
     </div>
     <button type="submit">
         <h2>Logg Inn</h2>
