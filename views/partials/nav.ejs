@@ -1,8 +1,9 @@
 <nav>
-    <a href="/"><h1>Kommune 69 - Varslingssystem</h1></a>
+    <h1>Kommune 69 - Varslingssystem</h1>
 
     <% if(typeof bruker !== 'undefined' && bruker !== null) { %>
-        <p><a href="/profil/<%= bruker._id %>"><%= bruker.fornavn %></a></p>
+        <a href="/">Alle hendelser</a>
+        <p><a href="/profil/<%= bruker._id %>">Hei, <%= bruker.fornavn %>!</a></p>
         <% if(bruker.avdeling == 'administrasjon') { %>
             <p><a href="/admin-oversikt">Administrasjon</a></p>
         <% } %>

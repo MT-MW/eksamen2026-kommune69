@@ -32,7 +32,7 @@ const brukerSchema = new Schema({
 
 brukerSchema.pre('save', async function () {
     try {
-        if (!this.isModified('password')) return;
+        if (!this.isModified('passord')) return;
 
         const hash = await argon2.hash(this.passord);
         this.passord = hash;
