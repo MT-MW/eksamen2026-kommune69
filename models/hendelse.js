@@ -13,6 +13,7 @@ const hendelseSchema = new Schema({
     },
     tema: {
         type: String,
+        enum: ['vannlekkasje', 'brannfare', 'it-feil'],
         required: true
     },
     prioritet: {
