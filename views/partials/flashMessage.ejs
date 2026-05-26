@@ -1,3 +1,5 @@
-<div class="message <%= flash.type %>">
-    <p><%= flash.message %></p>
-</div>
+<% if (flash && flash.message) { %>
+    <div class="message <%= flash.type %>">
+        <p><%= flash.message %></p>
+    </div>
+<% } %>

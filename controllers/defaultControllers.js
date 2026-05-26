@@ -13,7 +13,7 @@ const loginGET = (req, res) => {
             type: 'error'
         };
         res.clearCookie('flash');
-        res.render('index', { title: 'Logg Inn' })
+        res.render('login', { title: 'Logg Inn' })
     } catch (error) {
         console.log(error)
     }
@@ -54,11 +54,26 @@ const loginPOST = async (req, res) => {
     }
 }
 
-const problems = async (req, res) => {
+const index = async (req, res) => {
+    flash = {
+        message: req.cookies.flash,
+        type: 'error'
+    };
+        res.clearCookie('flash');
     try {
+        const filter = req.query.filter;
         const bruker = await findUser(req)
-        const results = await Hendelse.find();
-        res.render('problems', { title: 'Hendelser', results, bruker })
+
+        let results;
+
+        if(!filter || filter == '') {
+            results = await Hendelse.find()
+        } else {
+            results = await Hendelse.find({ tema: filter });
+        }
+        
+        
+        res.render('index', { title: 'Hendelser', results, bruker })
     } catch (error) {
         console.log(error)
     }
@@ -82,7 +97,7 @@ async function findUser(req) {
 module.exports = {
     loginGET,
     loginPOST,
-    problems,
+    index,
     createFlashCookie,
     findUser
 }

@@ -3,29 +3,32 @@
 
 <%- include('./partials/flashMessage.ejs') %>
 
-<h1>Velkommen <%= bruker.fornavn %> <%= bruker.etternavn %></h1>
+<h1 class="profileWelcome">Velkommen <%= bruker.fornavn %> <%= bruker.etternavn %>!</h1>
 
-<div>
+<div class="overheadResults">
     <h2>Dine Hendelser</h2>  
-    <form action="/ny-hendelse" method="get">
-        <button type="submit">Registrer ny hendelse</button>
-    </form>  
+    <%- include('./partials/newHendelseButton.ejs') %>
 </div>
 
 <% if( results.length > 0 ) { %>
+<div class="grid">
     <% results.forEach(res => { %>
         <%- include('./partials/hendelsePreview.ejs', { res }) %>
-    <% }); %>
+    <% }); %>    
+</div>
 <% } else { %>
     <p>Du har ingen tildelte hendelser</p>
 <% } %>
 
-<form action="/logg-ut" method="post">
-    <button type="submit">Logg Ut</button>
-</form>
+<div class="profileActionButtons">
+    <form action="/logg-ut" method="post">
+        <button class="actionButton" type="submit"><h3>Logg Ut</h3></button>
+    </form>
 
-<form action="/slett-bruker/<%= bruker._id %>" method="post">
-    <button type="submit">Slett bruker</button>
-</form>
+    <form action="/slett-bruker/<%= bruker._id %>" method="post">
+        <button class="actionButton" type="submit"><h3>Slett bruker</h3></button>
+    </form>    
+</div>
+
 
 <%- include('./partials/foot.ejs') %>
