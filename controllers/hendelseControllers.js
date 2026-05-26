@@ -1,6 +1,7 @@
 const { createFlashCookie, findUser } = require('./defaultControllers.js')
 const { Bruker, verifyPassword } = require('../models/bruker.js');
 const { Hendelse } = require('../models/hendelse.js');
+const { Tiltak } = require('../models/tiltak.js');
 
 const newHendelseGET = async (req, res) => {
     flash = {
@@ -47,7 +48,49 @@ const newHendelsePOST = async (req, res) => {
     }
 }
 
+const hendelseDetails = async (req, res) => {
+    const hendelseId = req.params.hendelseId;
+    try {
+        const bruker = await findUser(req);
+        const hendelse = await Hendelse.findById(hendelseId)
+        .populate('ansvarligPerson', 'fornavn etternavn')
+        .lean();
+
+        const tiltak = await Tiltak.find({ hendelse: hendelseId })
+        .populate('gjortAv', 'fornavn etternavn')
+        .lean();
+
+        const formattedHendelse = {
+            ...hendelse,
+            opprettelseDatoFormatted: formatDate(hendelse.opprettelseDato),
+            ferdigstiltDatoFormatted: formatDate(hendelse.ferdigstiltDato)
+        };
+
+        const formattedTiltak = tiltak.map(tiltak => ({
+            ...tiltak,
+            datoGjortFormatted: formatDate(tiltak.datoGjort),
+        }));
+        console.log(formattedHendelse)
+
+        res.render('detailHendelse', {
+            title: 'Hendelse detaljer',
+            hendelse: formattedHendelse,
+            tiltak: formattedTiltak,
+            bruker,
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+function formatDate(date) {
+    if(!date) return "";
+    return new Date(date).toLocaleDateString("no-NO");
+}
+
 module.exports = {
     newHendelseGET,
-    newHendelsePOST
+    newHendelsePOST,
+    hendelseDetails,
+    formatDate
 }
