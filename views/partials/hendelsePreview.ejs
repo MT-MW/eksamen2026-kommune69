@@ -1,18 +1,17 @@
-<div>
-    <div>
+<a href="/detaljer/<%= res._id %>" class="hendelsePreview">
+    <div class="hendelsePreTop">
         <div>
             <h3><%= res.tittel %></h3>
-            <p><%= res.tema %></p>            
+            <p class="capitalize"><%= res.tema %></p>            
         </div>
         <div>
-            <p>Prioritet: <%= res.prioritet %></p>
+            <p class="capitalize">Prioritet: <%= res.prioritet %></p>
         </div>
     </div>
     <div>
         <p><%= res.beskrivelse %></p>
     </div>
     <div>
-        <p>Status: <%= res.status %></p>
+        <p class="capitalize">Status: <%= res.status %></p>
     </div>
-    
-</div>
+</a>

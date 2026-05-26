@@ -1,0 +1,28 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<form class="createForm" action="/logg-inn" method="post">
+
+    <h1>Logg Inn</h1>
+
+    <div>
+        <label for="firstname"><p>Fornavn:</p></label>
+        <input type="text" id="firstname" name="firstname" required>
+    </div>
+    <div>
+        <label for="lastname"><p>Etternavn:</p></label>
+        <input type="text" id="lastname" name="lastname" required>
+    </div>
+    <div>
+        <label for="password"><p>Passord:</p></label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+        <%- include('./partials/flashMessage.ejs') %>
+    </div>
+    <button class="actionButton" type="submit">
+        <h3>Logg Inn</h3>
+    </button>
+</form>
+
+<%- include('./partials/foot.ejs') %>
