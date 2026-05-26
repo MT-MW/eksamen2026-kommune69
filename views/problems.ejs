@@ -1,0 +1,8 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<% results.forEach(res => { %>
+    <%- include('./partials/hendelsePreview.ejs', { res }) %>
+<% }); %>
+
+<%- include('./partials/foot.ejs') %>
