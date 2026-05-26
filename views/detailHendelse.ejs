@@ -1,0 +1,60 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<div>
+    <a href="/">Tilbake</a>
+</div>
+
+<div>
+    <div>
+        <h1><%= hendelse.tittel %></h1>
+        <p><%= hendelse.tema %></p>  
+    </div>   
+    <div>
+        <p>Dato opprettet: <%= hendelse.opprettelseDatoFormatted %></p>
+        <% if(!hendelse.ferdigstiltDato) { %>
+            <p>Dato løst: Fortsatt under behandling</p>
+        <% } else { %>
+            <p>Dato løst: <%= hendelse.ferdigstiltDatoFormatted %></p>
+        <% } %>
+    </div> 
+</div>
+<div>
+    <p><%= hendelse.beskrivelse %></p>
+</div>
+<div>
+    <div>
+        <p>Ansvarlig Person: <%= hendelse.ansvarligPerson.fornavn %> <%= hendelse.ansvarligPerson.etternavn %></p>
+    </div>
+    <div>
+        <p>Prioritet: <%= hendelse.prioritet %></p>
+    </div>
+    <div>
+        <p>Status: <%= hendelse.status %></p>
+    </div>
+</div>
+
+<div>
+    <form action="" method="post">
+        <button class="actionButton" type="submit"><h3>Sett status som løst</h3></button>
+    </form>
+
+    <form action="" method="post">
+        <button class="actionButton" type="submit"><h3>Arkiver hendelse</h3></button>
+    </form>    
+</div>
+
+<div class="overheadResults">
+    <h1>Tiltak:</h1>
+    <form action="/nytt-tiltak" method="get">
+        <button class="actionButton" type="submit"><h3>Legg til nytt tiltak</h3></button>
+    </form>
+</div>
+
+<div>
+    <% tiltak.forEach(tiltak => { %>
+        <%- include('./partials/tiltakPreview.ejs', { tiltak }) %>
+    <% }); %>   
+</div>
+
+<%- include('./partials/foot.ejs') %>
