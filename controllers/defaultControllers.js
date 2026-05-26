@@ -83,5 +83,6 @@ module.exports = {
     loginGET,
     loginPOST,
     problems,
-    createFlashCookie
+    createFlashCookie,
+    findUser
 }

@@ -10,6 +10,7 @@ const app = express();
 const dbHandler = require('./handlers/dbHandler');
 
 //require routes
+const userRoutes = require('./routes/userRoutes');
 const defaultRoutes = require('./routes/defaultRoutes');
 
 //middleware
@@ -28,6 +29,7 @@ app.listen(process.env.PORT, async () => {
 });
 
 //routes
+app.use('/', userRoutes);
 app.use('/', defaultRoutes);
 
 //404 catch
