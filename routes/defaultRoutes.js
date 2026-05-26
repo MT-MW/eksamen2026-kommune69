@@ -1,9 +1,11 @@
 const express = require('express');
 const defaultControllers = require('../controllers/defaultControllers');
+const middleware = require('../middleware/auth')
 
 router = express.Router()
 
-router.get('/', defaultControllers.loginGET);
-router.get('/hendelser', defaultControllers.problems);
+router.get('/logg-inn', defaultControllers.loginGET);
+router.post('/logg-inn', defaultControllers.loginPOST);
+router.get('/', middleware.authenticate, defaultControllers.problems);
 
 module.exports = router;

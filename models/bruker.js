@@ -32,7 +32,7 @@ const brukerSchema = new Schema({
 
 brukerSchema.pre('save', async function () {
     try {
-        if (!this.isModified('passord')) return;
+        if (!this.isModified('password')) return;
 
         const hash = await argon2.hash(this.passord);
         this.passord = hash;
@@ -49,7 +49,6 @@ async function verifyPassword(user, enteredPassword) {
         return false;
     }
 }
-
 
 const Bruker = mongoose.model('Bruker', brukerSchema, 'brukere');
 
