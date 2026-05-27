@@ -73,6 +73,13 @@ button:hover {
     margin: 20px;
 }
 
+.list {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    gap: 20px;
+}
+
 .filterButton {
     background-color: transparent;
     border: none;
@@ -106,6 +113,11 @@ button:hover {
 .sideBySide {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.sideBySideClose {
+    display: flex;
     align-items: center;
 }
 
@@ -244,4 +256,28 @@ button:hover {
 
 .Info {
     margin-top: 20px;
+}
+
+.adminOverview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin: 50px;
+    margin-top: 0;
+    height: 100vh;
+}
+
+.adminBox {
+    background-color: var(--silver);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    color: var(--black);
+    text-decoration: none;
+}
+
+.adminBox span {
+    top: auto;
+    text-align: right;
 }

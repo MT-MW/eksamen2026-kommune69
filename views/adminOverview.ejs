@@ -1,0 +1,25 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<h1 class="profileWelcome">Velkommen <%= bruker.fornavn %> <%= bruker.etternavn %>!</h1>
+
+<div class="adminOverview">
+    <a class="adminBox" href="/admin-brukere">
+        <h1>Brukere</h1>
+        <span><h1><%= brukere.length %></h1></span>
+    </a>
+    <a class="adminBox" href="/admin-aktive-hendelser">
+        <h1>Aktive hendelser</h1>
+        <span><h1><%= active.length %></h1></span>
+    </a>
+    <a class="adminBox" href="/admin-loste-hendelser">
+        <h1>Løste hendelser</h1>
+        <span><h1><%= solved.length %></h1></span>
+    </a>
+    <a class="adminBox" href="/admin-arkiv">
+        <h1>Arkiv</h1>
+        <span><h1><%= archive.length %></h1></span>
+    </a>
+</div>
+
+<%- include('./partials/foot.ejs') %>

@@ -88,7 +88,8 @@ const hendelseDetails = async (req, res) => {
             hendelse: formattedHendelse,
             tiltak: formattedTiltak,
             bruker,
-            isAllowed
+            isAllowed,
+            isOwner
         })
     } catch (error) {
         console.log(error)

@@ -37,7 +37,14 @@
     </div>
 </div>
 
-<div>
+<div class="sideBySideClose">
+    <% if(hendelse.status !== 'under behandling' && hendelse.status !== 'løst' && hendelse.status !== 'arkivert' && isOwner ) { %>
+        <form action="/oppdater-hendelse/<%= hendelse._id %>" method="post">
+            <input name="status" type="hidden" value="under behandling">
+            <button class="actionButton" type="submit"><h3>Sett status som under behandling</h3></button>
+        </form>
+    <% } %>
+
     <% if(hendelse.status !== 'løst' && hendelse.status !== 'arkivert' && isAllowed ) { %>
         <form action="/oppdater-hendelse/<%= hendelse._id %>" method="post">
             <input name="status" type="hidden" value="løst">

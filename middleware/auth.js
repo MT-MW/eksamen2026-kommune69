@@ -42,9 +42,9 @@ const adminAuth = async (req, res, next) => {
             return res.redirect('/logg-inn');
         }
 
-        if (user.rolle !== 'administrasjon') {
+        if (user.avdeling !== 'administrasjon') {
             console.log('access denied, no admin');
-            createFlashCookie(res, 'Du har ikke riktige rettighetene til å gjøre dette');
+            createFlashCookie(res, 'Du har ikke rettighetene til å gjøre dette');
             return res.redirect('/logg-inn');
         }
 
@@ -57,5 +57,6 @@ const adminAuth = async (req, res, next) => {
 };
 
 module.exports = {
-    authenticate
+    authenticate,
+    adminAuth
 }
