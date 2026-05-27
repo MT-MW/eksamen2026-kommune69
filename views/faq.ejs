@@ -1,0 +1,127 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<div class="details faqContainer">
+    <div class="Top">
+        <h1>FAQ – Ofte stilte spørsmål</h1>
+    </div>
+
+    <div class="faqList">
+
+        <div class="faqItem">
+            <h3>1. Jeg kommer ikke inn på systemet. Hva gjør jeg?</h3>
+            <p>Kontroller at:</p>
+            <ul class="faqUl">
+                <li>fornavn er korrekt skrevet</li>
+                <li>etternavn er korrekt skrevet</li>
+                <li>passordet er riktig</li>
+            </ul>
+            <p>Hvis problemet fortsetter må administrasjonen kontaktes.</p>
+        </div>
+
+        <div class="faqItem">
+            <h3>2. Hvorfor blir jeg sendt tilbake til innloggingssiden?</h3>
+            <p>Dette skjer dersom:</p>
+            <ul class="faqUl">
+                <li>du ikke er logget inn</li>
+                <li>sesjonen har utløpt</li>
+                <li>autentisering mislyktes</li>
+            </ul>
+            <p>Logg inn på nytt.</p>
+        </div>
+
+        <div class="faqItem">
+            <h3>3. Jeg finner ikke hendelsen min.</h3>
+            <ul class="faqUl">
+                <li>Velg Alle Hendelser</li>
+                <li>Fjern statusfilter</li>
+                <li>Kontroller om saken er arkivert</li>
+                <li>Søk i profilsiden dersom du er ansvarlig bruker</li>
+            </ul>
+        </div>
+
+        <div class="faqItem">
+            <h3>4. Jeg kan ikke endre status på en hendelse.</h3>
+            <p>Kun følgende brukere kan oppdatere status:</p>
+            <ul class="faqUl">
+                <li>ansvarlig person</li>
+                <li>administrasjon</li>
+            </ul>
+            <p>Hvis du mangler tilgang må ansvarlig person kontaktes.</p>
+        </div>
+
+        <div class="faqItem">
+            <h3>5. Hvorfor ser jeg ikke «Administrasjon»-knappen?</h3>
+            <p>Knappen er kun tilgjengelig for brukere med rollen <strong>Administrasjon</strong>.</p>
+            <p>Driftspersonell og IT-avdeling har ikke tilgang.</p>
+        </div>
+
+        <div class="faqItem">
+            <h3>6. Hvordan registrerer jeg et tiltak?</h3>
+            <ol class="faqOl">
+                <li>Åpne ønsket hendelse</li>
+                <li>Velg Legg til tiltak</li>
+                <li>Fyll ut skjemaet</li>
+                <li>Lagre</li>
+            </ol>
+            <p>Tiltaket vises deretter på detaljsiden.</p>
+        </div>
+
+        <div class="faqItem">
+            <h3>7. Kan jeg slette en hendelse?</h3>
+            <p>Nei.</p>
+            <p>Hendelser administreres gjennom:</p>
+            <ul class="faqUl">
+                <li>statusendring</li>
+                <li>arkivering (administrasjon)</li>
+            </ul>
+        </div>
+
+        <div class="faqItem">
+            <h3>8. Hva betyr statusnivåene?</h3>
+
+            <table class="faqTable">
+                <tr>
+                    <th>Status</th>
+                    <th>Betydning</th>
+                </tr>
+                <tr>
+                    <td>Lav</td>
+                    <td>Mindre alvorlig sak</td>
+                </tr>
+                <tr>
+                    <td>Middels</td>
+                    <td>Moderat alvorlighetsgrad</td>
+                </tr>
+                <tr>
+                    <td>Høy</td>
+                    <td>Krever rask oppfølging</td>
+                </tr>
+                <tr>
+                    <td>Kritisk</td>
+                    <td>Akutt sak med høy prioritet</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="faqItem">
+            <h3>9. Hva skjer når en sak markeres som løst?</h3>
+            <p>Systemet:</p>
+            <ul class="faqUl">
+                <li>oppdaterer status til Løst</li>
+                <li>registrerer løsningsdato</li>
+                <li>flytter saken til løste saker</li>
+            </ul>
+        </div>
+
+        <div class="faqItem">
+            <h3>10. Hva skjer hvis jeg sletter brukeren min?</h3>
+            <p>Brukerkontoen fjernes fra systemet.</p>
+            <p><strong>Dette kan ikke angres.</strong></p>
+        </div>
+
+    </div>
+</div>
+
+
+<%- include('./partials/foot.ejs') %>

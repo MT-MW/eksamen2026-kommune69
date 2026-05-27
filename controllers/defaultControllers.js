@@ -93,6 +93,24 @@ const index = async (req, res) => {
     }
 }
 
+const faq = async (req, res) => {
+    flash = {
+        message: req.cookies.flash,
+        type: 'error'
+    };
+    res.clearCookie('flash');
+    const bruker = await findUser(req)
+    try {
+        res.render('faq', {
+            bruker,
+            flash,
+            title: 'FAQ'
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 //create error message
 function createFlashCookie(res, message) {
     console.log("Creating flash cookie with message:", message);
@@ -112,6 +130,7 @@ module.exports = {
     loginGET,
     loginPOST,
     index,
+    faq,
     createFlashCookie,
     findUser
 }

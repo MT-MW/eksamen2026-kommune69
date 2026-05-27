@@ -281,3 +281,104 @@ button:hover {
     top: auto;
     text-align: right;
 }
+
+.faqContainer {
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.faqList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.faqItem {
+    background-color: var(--light-blue);
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.faqItem h3 {
+    margin-top: 0;
+    color: var(--dark-blue);
+}
+
+.faqUl,
+.faqOl {
+    display: block;
+    padding-left: 20px;
+}
+
+.faqUl li,
+.faqOl li {
+    margin: 8px 0;
+}
+
+.faqTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.faqTable th,
+.faqTable td {
+    border: 1px solid var(--blue);
+    padding: 10px;
+    text-align: left;
+}
+
+.faqTable th {
+    background-color: var(--dark-blue);
+    color: var(--white);
+}
+
+footer {
+    margin-top: auto;
+    width: 100%;
+}
+
+.footer {
+    background-color: var(--blue);
+    bottom: 0;
+    margin-top: 100px;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    align-items: end;
+    color: var(--white);
+    padding-top: 10px;
+}
+
+.footer p {
+    padding: 20px;
+}
+
+.footerInfo {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 100px;
+}
+
+.footerInfo div {
+    max-width: 80ch;
+    text-align: left;
+}
+
+.footerInfo a {
+    color: var(--white);
+    font-family: elza-narrow, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.footerInfo ul {
+    padding-inline-start: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.copyright {
+    text-align: center;
+}

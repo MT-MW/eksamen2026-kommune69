@@ -8,5 +8,6 @@ router = express.Router();
 router.get('/logg-inn', limitMiddleware.limiter, defaultControllers.loginGET);
 router.post('/logg-inn', limitMiddleware.limiter, defaultControllers.loginPOST);
 router.get('/', authMiddleware.authenticate, defaultControllers.index);
+router.get('/faq', authMiddleware.authenticate, defaultControllers.faq);
 
 module.exports = router;
