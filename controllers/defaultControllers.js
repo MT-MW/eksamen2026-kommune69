@@ -40,7 +40,7 @@ const loginPOST = async (req, res) => {
         const token = jwt.sign(
             {id: user._id}, 
             process.env.JWT_SECERET, 
-            {expiresIn: '7m'}
+            {expiresIn: '30m'}
         );
         
         res.cookie('accessToken', token, {

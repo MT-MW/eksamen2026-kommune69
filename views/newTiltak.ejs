@@ -1,0 +1,45 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<form class="createForm" action="/nytt-tiltak/<%= hendelse._id %>" method="post">
+
+    <h3>Logg et nytt tiltak for hendelse:</h3>
+    <h1><%= hendelse.tittel %></h1>
+
+    <div class="fillWhole">
+        <label for="title"><p>Tittel:</p></label>
+        <input type="text" id="title" name="title" required>
+    </div>
+
+    <div class="fillWhole">
+        <label for="description"><p>Beskrivelse:</p></label>
+        <textarea name="description" id="description" required></textarea>
+    </div>
+
+    <div class="fillWhole">
+        <label for="dateDone"><p>Dato tiltaket ble gjort:</p></label>
+        <input type="date" name="dateDone" id="dateDone" required>
+    </div>
+
+    <div class="fillWhole">
+        <label for="doneBy"><p>Tiltaket ble gjort av:</p></label>
+        <select class="selectOption" name="doneBy" id="doneBy">
+            <% brukere.forEach(bruker => { %>
+                <option value="<%= bruker._id %>">
+                    <p><%= bruker.fornavn %> <%= bruker.etternavn %></p>
+                </option>
+            <% }) %>
+        </select>
+    </div>
+
+    <div>
+        <%- include('./partials/flashMessage.ejs') %>
+    </div>
+
+    <button class="actionButton" type="submit">
+        <h3>Logg nytt tiltak</h3>
+    </button>
+
+</form>
+
+<%- include('./partials/foot.ejs') %>

@@ -57,6 +57,7 @@ const hendelseDetails = async (req, res) => {
         .lean();
 
         const tiltak = await Tiltak.find({ hendelse: hendelseId })
+        .sort({datoGjort: -1})
         .populate('gjortAv', 'fornavn etternavn')
         .lean();
 
@@ -83,6 +84,53 @@ const hendelseDetails = async (req, res) => {
     }
 }
 
+const newTiltakGET = async (req, res) => {
+    flash = {
+        message: req.cookies.flash,
+        type: 'error'
+    };
+    res.clearCookie('flash');
+    const bruker = await findUser(req);
+    const hendelseId = req.params.hendelseId;
+    try {
+        const hendelse = await Hendelse.findById(hendelseId)
+        const brukere = await Bruker.find()
+        
+        res.render('newTiltak', {
+            title: 'Nytt tiltak',
+            hendelse,
+            bruker,
+            brukere
+        })        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const newTiltakPOST = async (req, res) => {
+    const hendelseId = req.params.hendelseId;
+    const { title, description, dateDone, doneBy } = req.body;
+    try {
+
+        const gjortAv = await Bruker.findById(doneBy)
+
+        const newTiltak = new Tiltak({ 
+            tittel: title,
+            beskrivelse: description,
+            datoGjort: dateDone,
+            gjortAv,
+            hendelse: hendelseId
+        })
+
+        await newTiltak.save()
+        console.log('New tiltak was saved:', newTiltak)
+        res.redirect(`/detaljer/${hendelseId}`)
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 function formatDate(date) {
     if(!date) return "";
     return new Date(date).toLocaleDateString("no-NO");
@@ -92,5 +140,7 @@ module.exports = {
     newHendelseGET,
     newHendelsePOST,
     hendelseDetails,
+    newTiltakGET,
+    newTiltakPOST,
     formatDate
 }
