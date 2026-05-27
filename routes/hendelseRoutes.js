@@ -7,5 +7,7 @@ router = express.Router();
 router.get('/ny-hendelse', middleware.authenticate, hendelseControllers.newHendelseGET);
 router.post('/ny-hendelse', middleware.authenticate, hendelseControllers.newHendelsePOST);
 router.get('/detaljer/:hendelseId', middleware.authenticate, hendelseControllers.hendelseDetails);
+router.get('/nytt-tiltak/:hendelseId', middleware.authenticate, hendelseControllers.newTiltakGET);
+router.post('/nytt-tiltak/:hendelseId', middleware.authenticate, hendelseControllers.newTiltakPOST);
 
 module.exports = router;
