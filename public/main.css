@@ -103,6 +103,23 @@ button:hover {
     color: var(--gray);
 }
 
+.sideBySide {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fillWhole {
+    width: 100%;
+}
+
+.fillWhole input, textarea {
+    width: 100%
+}
+
+.fillWhole textarea {
+    margin-bottom: 20px;
+}
+
 .overheadResults {
     display: flex;
     align-items: center;
@@ -130,6 +147,7 @@ button:hover {
     border-radius: 3px;
     border: none;
     min-width: 200px;
+    margin: 20px;
 }
 
 .actionButton:hover {
@@ -153,6 +171,13 @@ button:hover {
     padding: 5px;
 }
 
+.selectOption {
+    width: 100%;
+    font-size: 1rem;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
 .error {
     color: var(--red);
     background-color: var(--light-red);
@@ -166,14 +191,48 @@ button:hover {
     display: flex;
     justify-content: space-between;
     max-width: 90%;
-    margin: 0 auto;
+    margin: 20px auto;
     align-items: center;
 }
 
-.tiltakLeft p {
+.textLeft p {
     text-align: left;
 }
 
-.tiltakRight p {
+.textRight p {
     text-align: right;
+}
+
+.errorPage {
+    text-align: center;
+    margin: 15% auto;
+}
+
+.details {
+    margin: 0 20px;
+}
+
+.backBttn {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    color: var(--black);
+    text-decoration: none;
+}
+
+.backBttn svg {
+    transform: rotate(180deg);
+    fill: var(--black);
+}
+
+.Top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--gray) 1px solid;
+}
+
+.Info {
+    margin-top: 20px;
 }
