@@ -38,20 +38,28 @@
 </div>
 
 <div>
-    <form action="" method="post">
-        <button class="actionButton" type="submit"><h3>Sett status som løst</h3></button>
-    </form>
+    <% if(hendelse.status !== 'løst' && hendelse.status !== 'arkivert' && isAllowed ) { %>
+        <form action="/oppdater-hendelse/<%= hendelse._id %>" method="post">
+            <input name="status" type="hidden" value="løst">
+            <button class="actionButton" type="submit"><h3>Sett status som løst</h3></button>
+        </form>
+    <% } %>
 
-    <form action="" method="post">
-        <button class="actionButton" type="submit"><h3>Arkiver hendelse</h3></button>
-    </form>    
+    <% if(hendelse.status !== 'arkivert' && isAllowed ) { %>
+        <form action="/oppdater-hendelse/<%= hendelse._id %>" method="post">
+                    <input name="status" type="hidden" value="arkivert">
+            <button class="actionButton" type="submit"><h3>Arkiver hendelse</h3></button>
+        </form>   
+    <% } %>
 </div>
 
 <div class="overheadResults">
     <h1>Tiltak:</h1>
-    <form action="/nytt-tiltak/<%= hendelse._id %>" method="get">
-        <button class="actionButton" type="submit"><h3>Logg nytt tiltak</h3></button>
-    </form>
+    <% if(hendelse.status !== 'arkivert' && isAllowed ) { %>
+        <form action="/nytt-tiltak/<%= hendelse._id %>" method="get">
+            <button class="actionButton" type="submit"><h3>Logg nytt tiltak</h3></button>
+        </form>
+    <% } %>
 </div>
 
 <div>

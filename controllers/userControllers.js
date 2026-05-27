@@ -21,7 +21,11 @@ const profile = async (req, res) => {
             return res.redirect(`/profil/${loggedInUser._id}`);
         }
 
-        const results = await Hendelse.find({ ansvarligPerson: loggedInUser._id });
+        //finds hendelser that belongs to user excluding archived and solved
+        const results = await Hendelse.find({ 
+            ansvarligPerson: loggedInUser._id, 
+            status: { $nin: [ 'arkivert', 'løst' ] }
+        });
 
         res.render('profile', { 
             title: 'Profil', 
