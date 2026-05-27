@@ -10,5 +10,6 @@ router.post('/ny-hendelse', authMiddleware.authenticate,limitMiddleware.limiter,
 router.get('/detaljer/:hendelseId', authMiddleware.authenticate, hendelseControllers.hendelseDetails);
 router.get('/nytt-tiltak/:hendelseId', authMiddleware.authenticate, hendelseControllers.newTiltakGET);
 router.post('/nytt-tiltak/:hendelseId', authMiddleware.authenticate, limitMiddleware.limiter, hendelseControllers.newTiltakPOST);
+router.post('/oppdater-hendelse/:hendelseId', authMiddleware.authenticate,limitMiddleware.limiter, hendelseControllers.updateHendelsePOST)
 
 module.exports = router;

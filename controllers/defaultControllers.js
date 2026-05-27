@@ -77,8 +77,10 @@ const index = async (req, res) => {
             query.prioritet = prioritetFilter;
         }
 
+        query.status = { $nin: [ 'arkivert', 'løst' ] };
+
         const results = await Hendelse.find(query)
-        .sort({ opprettelseDato: -1 });
+        .sort({ opprettelseDato: -1 })
         
         res.render('index', { 
             title: 'Hendelser', 

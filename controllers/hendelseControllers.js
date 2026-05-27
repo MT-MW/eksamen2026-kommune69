@@ -51,16 +51,21 @@ const newHendelsePOST = async (req, res) => {
 const hendelseDetails = async (req, res) => {
     const hendelseId = req.params.hendelseId;
     try {
+        //gets logged in user
         const bruker = await findUser(req);
+
+        //gets the hendelse and turns in to plain javascriptobjects so i can format the dates
         const hendelse = await Hendelse.findById(hendelseId)
         .populate('ansvarligPerson', 'fornavn etternavn')
         .lean();
 
+        //gets the tiltak and turns in to plain javascriptobjects so i can format the dates
         const tiltak = await Tiltak.find({ hendelse: hendelseId })
         .sort({datoGjort: -1})
         .populate('gjortAv', 'fornavn etternavn')
         .lean();
 
+        //formats the dates
         const formattedHendelse = {
             ...hendelse,
             opprettelseDatoFormatted: formatDate(hendelse.opprettelseDato),
@@ -71,13 +76,19 @@ const hendelseDetails = async (req, res) => {
             ...tiltak,
             datoGjortFormatted: formatDate(tiltak.datoGjort),
         }));
-        console.log(formattedHendelse)
+
+        //checks if user is admin or responsible for the hendelse
+        const isOwner = bruker._id.toString() === hendelse.ansvarligPerson._id.toString();
+        const isAdmin = bruker.avdeling === 'administrasjon';
+
+        const isAllowed = isOwner || isAdmin;
 
         res.render('detailHendelse', {
             title: 'Hendelse detaljer',
             hendelse: formattedHendelse,
             tiltak: formattedTiltak,
             bruker,
+            isAllowed
         })
     } catch (error) {
         console.log(error)
@@ -131,6 +142,24 @@ const newTiltakPOST = async (req, res) => {
     }
 }
 
+const updateHendelsePOST = async (req, res) => {
+    const hendelseId = req.params.hendelseId;
+    const newState = req.body.status;
+    try {
+
+        const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
+            hendelseId,
+            { status: newState },
+            { returnDocument: 'after', runValidators: true }
+        )
+
+
+        res.redirect(`/detaljer/${hendelseId}`)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 function formatDate(date) {
     if(!date) return "";
     return new Date(date).toLocaleDateString("no-NO");
@@ -142,5 +171,6 @@ module.exports = {
     hendelseDetails,
     newTiltakGET,
     newTiltakPOST,
+    updateHendelsePOST,
     formatDate
 }
