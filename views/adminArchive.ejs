@@ -1,0 +1,13 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<h1 class="profileWelcome">Arkiv:</h1>
+
+<div class="list">
+    <% results.forEach(res => { %>
+        <%- include('./partials/hendelsePreview.ejs', { res }) %>
+    <% }); %>
+</div>
+
+
+<%- include('./partials/foot.ejs') %>

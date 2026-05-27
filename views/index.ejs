@@ -54,9 +54,13 @@
 
 
 <div class="grid">
-    <% results.forEach(res => { %>
-        <%- include('./partials/hendelsePreview.ejs', { res }) %>
-    <% }); %>    
+    <% if(results.length > 0) { %>
+        <% results.forEach(res => { %>
+            <%- include('./partials/hendelsePreview.ejs', { res }) %>
+        <% }); %>   
+    <% } else { %>
+        <p>Ingen aktive hendelser</p>
+    <% } %>
 </div>
 
 
