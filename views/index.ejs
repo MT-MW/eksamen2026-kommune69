@@ -33,7 +33,23 @@
         </li>
     </ul>
 
-    <%- include('./partials/newHendelseButton.ejs') %>    
+    <div class="sideBySide">
+        <form class="filterForm" action="/" method="get">
+            <label for="prioritetFilter"><p>Prioritet:</p></label>
+            <select class="selectOption" name="prioritetFilter" id="prioritetFilter" onchange="this.form.submit()">
+                <option value="" selected disabled>Velg prioritet</option>
+                <% prioritet.forEach(prioritet => { %>
+                    <option value="<%= prioritet %>">
+                        <%= prioritet %>
+                    </option>
+                <% }) %>
+            </select>            
+        </form>
+
+        <%- include('./partials/newHendelseButton.ejs') %>            
+    </div>
+
+
 </div>
 
 

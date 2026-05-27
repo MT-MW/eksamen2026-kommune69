@@ -62,18 +62,30 @@ const index = async (req, res) => {
     res.clearCookie('flash');
     try {
         const filter = req.query.filter;
+        const prioritetFilter = req.query.prioritetFilter;
+
+        const prioritet = Hendelse.schema.path('prioritet').enumValues;
         const bruker = await findUser(req)
 
-        let results;
+        let query = {};
 
-        if(!filter || filter == '') {
-            results = await Hendelse.find().sort({opprettelseDato: -1})
-        } else {
-            results = await Hendelse.find({ tema: filter });
+        if (filter) {
+            query.tema = filter;
         }
+
+        if (prioritetFilter) {
+            query.prioritet = prioritetFilter;
+        }
+
+        const results = await Hendelse.find(query)
+        .sort({ opprettelseDato: -1 });
         
-        
-        res.render('index', { title: 'Hendelser', results, bruker })
+        res.render('index', { 
+            title: 'Hendelser', 
+            results, 
+            bruker,
+            prioritet
+        })
     } catch (error) {
         console.log(error)
     }
