@@ -1,9 +1,8 @@
 * {
     --white: #F8FAFA;
-    --silver: #C5C6C8;
-    --gray: #6f7074;
-    --dark-gray: #4F5052;
-    --rasin-black: #252728;
+    --light-blue: #94a4c3;
+    --blue: #4f5775;
+    --dark-blue: #314468;
     --black: #0D0E10;
     --red: #cb0000;
     --light-red: #cb00004b;
@@ -28,7 +27,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    border-bottom: var(--dark-gray) 1px solid;
+    border-bottom: var(--dark-blue) 1px solid;
     width: 100%;
 }
 
@@ -59,7 +58,7 @@ button:hover {
 }
 
 .navLinks span {
-    border-left: var(--dark-gray) 1px solid;
+    border-left: var(--dark-blue) 1px solid;
     padding-left: 20px;
     height: 30px;
     display: flex;
@@ -86,12 +85,12 @@ button:hover {
 }
 
 .filterButton:hover {
-    background-color: var(--silver);
+    background-color: var(--light-blue);
     border-radius: 3px;
 }
 
 .hendelsePreview {
-    background-color: var(--silver);
+    background-color: var(--light-blue);
     color: var(--black);
     text-decoration: none;
     width: 100%;
@@ -107,7 +106,8 @@ button:hover {
 
 .capitalize {
     text-transform: capitalize;
-    color: var(--gray);
+    color: var(--dak-blue);
+    font-style: italic;
 }
 
 .sideBySide {
@@ -155,7 +155,7 @@ button:hover {
 }
 
 .actionButton {
-    background-color: var(--dark-gray);
+    background-color: var(--dark-blue);
     color: var(--white);
     border-radius: 3px;
     border: none;
@@ -164,7 +164,7 @@ button:hover {
 }
 
 .actionButton:hover {
-    background-color: var(--gray);
+    background-color: var(--blue);
 }
 
 .createForm {
@@ -251,7 +251,7 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: var(--gray) 1px solid;
+    border-bottom: var(--blue) 1px solid;
 }
 
 .Info {
@@ -268,7 +268,7 @@ button:hover {
 }
 
 .adminBox {
-    background-color: var(--silver);
+    background-color: var(--light-blue);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
