@@ -5,20 +5,20 @@
 
     <h1>Registrer ny hendelse</h1>
 
-    <div>
+    <div class="fillWhole">
         <label for="title"><p>Tittel:</p></label>
         <input type="text" id="title" name="title" required>
     </div>
 
-    <div>
+    <div class="fillWhole">
         <label for="description"><p>Beskrivelse:</p></label>
         <textarea name="description" id="description" required></textarea>
     </div>
 
-    <div>
-        <div>
+    <div class="sideBySide fillWhole">
+        <div class="">
             <label for="theme"><p>Tema:</p></label>
-            <select name="theme" id="theme">
+            <select class="selectOption" name="theme" id="theme">
                 <% tema.forEach(tema => { %>
                     <option value="<%= tema %>">
                         <%= tema %>
@@ -26,9 +26,9 @@
                 <% }) %>
             </select>
         </div>
-        <div>
+        <div class="">
             <label for="priority"><p>Prioritet:</p></label>
-            <select name="priority" id="priority">
+            <select class="selectOption" name="priority" id="priority">
                 <% prioritet.forEach(prioritet => { %>
                     <option value="<%= prioritet %>">
                         <%= prioritet %>
@@ -38,9 +38,9 @@
         </div>        
     </div>
 
-    <div>
+    <div class="fillWhole">
         <label for="personResponsible"><p>Ansvarlig Person:</p></label>
-        <select name="personResponsible" id="personResponsible">
+        <select class="selectOption" name="personResponsible" id="personResponsible">
             <% brukere.forEach(bruker => { %>
                 <option value="<%= bruker._id %>">
                     <p><%= bruker.fornavn %> <%= bruker.etternavn %></p>
