@@ -1,11 +1,12 @@
 const express = require('express');
 const defaultControllers = require('../controllers/defaultControllers');
-const middleware = require('../middleware/auth');
+const authMiddleware = require('../middleware/auth');
+const limitMiddleware = require('../middleware/rateLimiter');
 
 router = express.Router();
 
-router.get('/logg-inn', defaultControllers.loginGET);
-router.post('/logg-inn', defaultControllers.loginPOST);
-router.get('/', middleware.authenticate, defaultControllers.index);
+router.get('/logg-inn', limitMiddleware.limiter, defaultControllers.loginGET);
+router.post('/logg-inn', limitMiddleware.limiter, defaultControllers.loginPOST);
+router.get('/', authMiddleware.authenticate, defaultControllers.index);
 
 module.exports = router;
