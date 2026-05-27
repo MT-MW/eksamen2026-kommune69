@@ -106,6 +106,7 @@ button:hover {
 .sideBySide {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .fillWhole {
@@ -169,6 +170,14 @@ button:hover {
     margin-bottom: 20px;
     font-size: 1rem;
     padding: 5px;
+}
+
+.filterForm {
+    margin: 0;
+}
+
+.filterForm p {
+    margin: 0;
 }
 
 .selectOption {
