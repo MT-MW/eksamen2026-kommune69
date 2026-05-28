@@ -16,7 +16,7 @@ const adminOverview = async (req, res) => {
 
         //get all active hendelser
         const active = await Hendelse.find({
-            status: { $in: [ 'registrert', 'underbehandling' ] }
+            status: { $in: [ 'registrert', 'under behandling' ] }
         })
         //get all solved hendelser
         const solved = await Hendelse.find({
@@ -80,7 +80,7 @@ const adminActive = async (req, res) => {
 
         //get all active hendelser
         const results = await Hendelse.find({
-            status: { $in: [ 'registrert', 'underbehandling' ] }
+            status: { $in: [ 'registrert', 'under behandling' ] }
         })
 
         res.render('adminActive', {

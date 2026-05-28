@@ -78,7 +78,10 @@ const index = async (req, res) => {
         const prioritetFilter = req.query.prioritetFilter;
 
         // get the possible enum values from schema
-        const prioritet = Hendelse.schema.path('prioritet').enumValues;
+        const allpriorities = Hendelse.schema.path('prioritet').enumValues;
+
+        //exclude priorities løst and arkivert
+        const prioritet = allpriorities.filter(v => !['løst', 'arkivert'].includes(v));
 
         //set query to empty
         let query = {};

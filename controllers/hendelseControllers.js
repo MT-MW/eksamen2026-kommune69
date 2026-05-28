@@ -14,7 +14,9 @@ const newHendelseGET = async (req, res) => {
 
         //get possible enum values from schema model
         const tema = Hendelse.schema.path('tema').enumValues;
-        const prioritet = Hendelse.schema.path('prioritet').enumValues;
+        const allpriorities = Hendelse.schema.path('prioritet').enumValues;
+        //exclude priorities løst and arkivert
+        const prioritet = allpriorities.filter(v => !['løst', 'arkivert'].includes(v));
 
         //get all users
         const brukere = await Bruker.find();
@@ -168,7 +170,7 @@ const updateHendelsePOST = async (req, res) => {
         if(newState == 'løst') {
             const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
                 hendelseId,
-                { status: newState, prioritet:newState, ferdigstiltDato: new Date() },
+                { status: newState, prioritet: newState, ferdigstiltDato: new Date() },
                 { returnDocument: 'after', runValidators: true }
             )
         } else if(newState == 'arkivert') {
@@ -177,6 +179,12 @@ const updateHendelsePOST = async (req, res) => {
                 { status: newState, prioritet: newState },
                 { returnDocument: 'after', runValidators: true }
             )            
+        } else if(newState == 'under behandling') {
+            const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
+                hendelseId,
+                { status: newState },
+                { returnDocument: 'after', runValidators: true }
+            )              
         }
 
         res.redirect(`/detaljer/${hendelseId}`)

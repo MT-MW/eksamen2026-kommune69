@@ -38,5 +38,5 @@ app.use('/', defaultRoutes);
 
 //404 catch
 app.use((req, res) => {
-    res.status(404).render('404', { title: 'error 404' });
+    res.status(404).render('404', { title: 'error 404', bruker: null });
 });
