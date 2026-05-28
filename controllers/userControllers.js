@@ -6,13 +6,13 @@ const { Bruker, verifyPassword } = require('../models/bruker.js');
 const { Hendelse } = require('../models/hendelse.js');
 
 const profile = async (req, res) => {
-    flash = {
-        message: req.cookies.flash,
-        type: 'error'
-    };
-    res.clearCookie('flash');
-
     try {
+        flash = {
+            message: req.cookies.flash,
+            type: 'error'
+        };
+        res.clearCookie('flash');
+        //get the logged in user (same as others just another name)
         const loggedInUser = await findUser(req);
 
         //checks if logged in user is same as in params
@@ -61,7 +61,7 @@ const delUser = async (req, res) => {
             return res.redirect(`/profil/${loggedInUser._id}`);
         }
 
-        //deletes user
+        //findt user in db and deletes user
         const userToDelete = await Bruker.findByIdAndDelete(loggedInUser._id)
         console.log(`Bruker slettet: ${userToDelete.fornavn, userToDelete.etternavn}`)
         

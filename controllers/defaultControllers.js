@@ -1,18 +1,24 @@
+//dependencies
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+//get all schema models
 const { Bruker, verifyPassword } = require('../models/bruker.js');
 const { Hendelse } = require('../models/hendelse.js');
 const { Tiltak } = require('../models/tiltak.js');
 
 const loginGET = (req, res) => {
     try {
+        //clear jwt cookie / log out user
         res.clearCookie('accessToken');
+
+        //get flash message and remove cookie
         flash = {
             message: req.cookies.flash,
             type: 'error'
         };
         res.clearCookie('flash');
+
         res.render('login', { 
             title: 'Logg Inn',
             bruker: null
@@ -23,6 +29,7 @@ const loginGET = (req, res) => {
 }
 
 const loginPOST = async (req, res) => {
+    //get field values from submitted form/body
     const { firstname, lastname, password } = req.body;
     try {
         //checks if user exists in database
@@ -58,30 +65,38 @@ const loginPOST = async (req, res) => {
 }
 
 const index = async (req, res) => {
-    flash = {
-        message: req.cookies.flash,
-        type: 'error'
-    };
-    res.clearCookie('flash');
     try {
+        const bruker = await findUser(req)
+        flash = {
+            message: req.cookies.flash,
+            type: 'error'
+        };
+        res.clearCookie('flash');
+
+        //gets filter value from the query
         const filter = req.query.filter;
         const prioritetFilter = req.query.prioritetFilter;
 
+        // get the possible enum values from schema
         const prioritet = Hendelse.schema.path('prioritet').enumValues;
-        const bruker = await findUser(req)
 
+        //set query to empty
         let query = {};
 
+        // if there is a filter value set the query.tema to the value
         if (filter) {
             query.tema = filter;
         }
 
+        // if there is a priority filter value set query.prioritet to the value
         if (prioritetFilter) {
             query.prioritet = prioritetFilter;
         }
 
+        // only show hendelser with status arkivert or løst
         query.status = { $nin: [ 'arkivert', 'løst' ] };
 
+        //get all hendelser that match the query spesifications and sort by newest first
         const results = await Hendelse.find(query)
         .sort({ opprettelseDato: -1 })
         
@@ -97,13 +112,15 @@ const index = async (req, res) => {
 }
 
 const faq = async (req, res) => {
-    flash = {
-        message: req.cookies.flash,
-        type: 'error'
-    };
-    res.clearCookie('flash');
-    const bruker = await findUser(req)
     try {
+        flash = {
+            message: req.cookies.flash,
+            type: 'error'
+        };
+        res.clearCookie('flash');
+        
+        const bruker = await findUser(req)
+
         res.render('faq', {
             bruker,
             flash,

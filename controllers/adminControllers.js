@@ -5,22 +5,28 @@ const { Tiltak } = require('../models/tiltak.js');
 
 const adminOverview = async (req, res) => {
     try {
+        //get logged in user
         const bruker = await findUser(req);
+        //get flash and remove cookie
         flash = {
             message: req.cookies.flash,
             type: 'error'
         };
         res.clearCookie('flash');
 
+        //get all active hendelser
         const active = await Hendelse.find({
             status: { $in: [ 'registrert', 'underbehandling' ] }
         })
+        //get all solved hendelser
         const solved = await Hendelse.find({
             status: { $in: 'løst' }
         })
+        //get all archived hendelser
         const archive = await Hendelse.find({
             status: { $in: 'arkivert' }
         })
+        //get all users
         const brukere = await Bruker.find()
 
         res.render('adminOverview', {
@@ -39,13 +45,16 @@ const adminOverview = async (req, res) => {
 
 const adminUsers = async (req, res) => {
     try {
+        //get logged in user
         const bruker = await findUser(req);
+        //get flash and remove cookie
         flash = {
             message: req.cookies.flash,
             type: 'error'
         };
         res.clearCookie('flash');
 
+        //get all users
         const brukere = await Bruker.find()
         .populate('tildelteHendelser')
 
@@ -69,6 +78,7 @@ const adminActive = async (req, res) => {
         };
         res.clearCookie('flash');
 
+        //get all active hendelser
         const results = await Hendelse.find({
             status: { $in: [ 'registrert', 'underbehandling' ] }
         })
@@ -93,6 +103,7 @@ const adminSolved = async (req, res) => {
         };
         res.clearCookie('flash');
 
+        //get all solved hendelser
         const results = await Hendelse.find({
             status: { $in: 'løst' }
         })
@@ -117,6 +128,7 @@ const adminArchive = async (req, res) => {
         };
         res.clearCookie('flash');
 
+        //get all archived hendelser
         const results = await Hendelse.find({
             status: { $in: 'arkivert' }
         })

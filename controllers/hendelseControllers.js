@@ -4,15 +4,19 @@ const { Hendelse } = require('../models/hendelse.js');
 const { Tiltak } = require('../models/tiltak.js');
 
 const newHendelseGET = async (req, res) => {
-    flash = {
-        message: req.cookies.flash,
-        type: 'error'
-    };
-    res.clearCookie('flash');
     try {
+        flash = {
+            message: req.cookies.flash,
+            type: 'error'
+        };
+        res.clearCookie('flash');
         const bruker = await findUser(req);
+
+        //get possible enum values from schema model
         const tema = Hendelse.schema.path('tema').enumValues;
         const prioritet = Hendelse.schema.path('prioritet').enumValues;
+
+        //get all users
         const brukere = await Bruker.find();
 
         res.render('newHendelse', { 
@@ -29,9 +33,10 @@ const newHendelseGET = async (req, res) => {
 }
 
 const newHendelsePOST = async (req, res) => {
+    //get field values from form/body
     const { title, description, theme, priority, personResponsible } = req.body;
     try {
-
+        //create new hendelse with the values
         const newHendelse = new Hendelse({ 
             tittel: title,
             beskrivelse: description,
@@ -40,8 +45,10 @@ const newHendelsePOST = async (req, res) => {
             ansvarligPerson: personResponsible
         })
 
+        //save new hendelse
         await newHendelse.save()
         console.log('Ny hendelse lagret', newHendelse)
+
         res.redirect('/')
     } catch (error) {
         console.log(error)
@@ -98,15 +105,18 @@ const hendelseDetails = async (req, res) => {
 }
 
 const newTiltakGET = async (req, res) => {
-    flash = {
-        message: req.cookies.flash,
-        type: 'error'
-    };
-    res.clearCookie('flash');
-    const bruker = await findUser(req);
     const hendelseId = req.params.hendelseId;
     try {
+        flash = {
+            message: req.cookies.flash,
+            type: 'error'
+        };
+        res.clearCookie('flash');
+        const bruker = await findUser(req);
+
+        //get the hendelse the tiltak is going to belong to
         const hendelse = await Hendelse.findById(hendelseId)
+        //get all users
         const brukere = await Bruker.find()
         
         res.render('newTiltak', {
@@ -125,8 +135,10 @@ const newTiltakPOST = async (req, res) => {
     const { title, description, dateDone, doneBy } = req.body;
     try {
 
+        //get the user tha the tiltak is done by from database
         const gjortAv = await Bruker.findById(doneBy)
 
+        //create new tiltak with right values
         const newTiltak = new Tiltak({ 
             tittel: title,
             beskrivelse: description,
@@ -135,10 +147,11 @@ const newTiltakPOST = async (req, res) => {
             hendelse: hendelseId
         })
 
+        //save new tiltak
         await newTiltak.save()
         console.log('New tiltak was saved:', newTiltak)
+
         res.redirect(`/detaljer/${hendelseId}`)
-        
     } catch (error) {
         console.log(error)
     }
@@ -146,15 +159,18 @@ const newTiltakPOST = async (req, res) => {
 
 const updateHendelsePOST = async (req, res) => {
     const hendelseId = req.params.hendelseId;
+    //get the value from the form/body
     const newState = req.body.status;
     try {
 
+        //if new state value is løst then set the state and priority to løst and set the done date
+        //but if state value is arkivert then the done date doesnt get set
         if(newState == 'løst') {
             const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
                 hendelseId,
                 { status: newState, prioritet:newState, ferdigstiltDato: new Date() },
                 { returnDocument: 'after', runValidators: true }
-            )            
+            )
         } else if(newState == 'arkivert') {
             const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
                 hendelseId,
@@ -169,6 +185,7 @@ const updateHendelsePOST = async (req, res) => {
     }
 }
 
+//format date to dd.mm.yyyy
 function formatDate(date) {
     if(!date) return "";
     return new Date(date).toLocaleDateString("no-NO");
