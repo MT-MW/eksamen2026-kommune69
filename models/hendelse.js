@@ -18,7 +18,7 @@ const hendelseSchema = new Schema({
     },
     prioritet: {
         type: String,
-        enum: ['lav', 'middels', 'høy', 'kritisk'],
+        enum: ['lav', 'middels', 'høy', 'kritisk', 'løst', 'arkivert'],
         required: true
     },
     status: {
