@@ -14,7 +14,8 @@ const brukerSchema = new Schema({
     },
     passord: {
         type: String,
-        required: true
+        required: true,
+        minlength: 6
     },
     avdeling: {
         type: String,
