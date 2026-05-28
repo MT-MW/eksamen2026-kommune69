@@ -89,7 +89,8 @@ const hendelseDetails = async (req, res) => {
             tiltak: formattedTiltak,
             bruker,
             isAllowed,
-            isOwner
+            isOwner,
+            isAdmin
         })
     } catch (error) {
         console.log(error)
@@ -148,12 +149,19 @@ const updateHendelsePOST = async (req, res) => {
     const newState = req.body.status;
     try {
 
-        const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
-            hendelseId,
-            { status: newState },
-            { returnDocument: 'after', runValidators: true }
-        )
-
+        if(newState == 'løst') {
+            const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
+                hendelseId,
+                { status: newState, ferdigstiltDato: new Date() },
+                { returnDocument: 'after', runValidators: true }
+            )            
+        } else {
+            const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
+                hendelseId,
+                { status: newState },
+                { returnDocument: 'after', runValidators: true }
+            )            
+        }
 
         res.redirect(`/detaljer/${hendelseId}`)
     } catch (error) {

@@ -1,5 +1,6 @@
 * {
     --white: #F8FAFA;
+    --hover-color: #acb6cc;
     --light-blue: #94a4c3;
     --blue: #4f5775;
     --dark-blue: #314468;
@@ -20,6 +21,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 nav {
@@ -96,6 +98,10 @@ button:hover {
     width: 100%;
     padding: 20px;
     border-radius: 3px;
+}
+
+.hendelsePreview:hover {
+    background-color: var(--hover-color);
 }
 
 .hendelsePreTop {
@@ -216,6 +222,10 @@ button:hover {
     align-items: center;
 }
 
+.tiltakPreview:hover {
+    background-color: var(--light-blue);
+}
+
 .textLeft p {
     text-align: left;
 }
@@ -274,7 +284,12 @@ button:hover {
     justify-content: space-between;
     padding: 20px;
     color: var(--black);
+    border-radius: 3px;
     text-decoration: none;
+}
+
+.adminBox:hover {
+    background-color: var(--hover-color);
 }
 
 .adminBox span {
@@ -339,6 +354,7 @@ footer {
 }
 
 .footer {
+    top: auto;
     background-color: var(--blue);
     bottom: 0;
     margin-top: 100px;
