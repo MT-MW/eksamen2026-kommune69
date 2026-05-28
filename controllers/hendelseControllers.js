@@ -152,13 +152,13 @@ const updateHendelsePOST = async (req, res) => {
         if(newState == 'løst') {
             const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
                 hendelseId,
-                { status: newState, ferdigstiltDato: new Date() },
+                { status: newState, prioritet:newState, ferdigstiltDato: new Date() },
                 { returnDocument: 'after', runValidators: true }
             )            
-        } else {
+        } else if(newState == 'arkivert') {
             const hendelseToUpdate = await Hendelse.findByIdAndUpdate(
                 hendelseId,
-                { status: newState },
+                { status: newState, prioritet: newState },
                 { returnDocument: 'after', runValidators: true }
             )            
         }
