@@ -10,7 +10,9 @@
             <h3>Nyttige lenker:</h3>
             <ul>
                 <li><a href="/faq">FAQ</a></li>
-                <li><a href="/profil/<%= bruker._id %>">Min side</a></li>
+                <% if(bruker) { %>
+                    <li><a href="/profil/<%= bruker._id %>">Min side</a></li>
+                <% } %>
             </ul>
         </div>
     </div>

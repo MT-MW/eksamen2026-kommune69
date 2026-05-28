@@ -4,9 +4,13 @@
 <h1 class="profileWelcome">Løste hendelser:</h1>
 
 <div class="list">
-    <% results.forEach(res => { %>
-        <%- include('./partials/hendelsePreview.ejs', { res }) %>
-    <% }); %>    
+    <% if(results.length > 0 ) { %>
+        <% results.forEach(res => { %>
+            <%- include('./partials/hendelsePreview.ejs', { res }) %>
+        <% }); %>    
+    <% } else { %>
+        <p>Ser ut som at vi ikke har noe data å vise her akkurat nå.</p>
+    <% } %>
 </div>
 
 

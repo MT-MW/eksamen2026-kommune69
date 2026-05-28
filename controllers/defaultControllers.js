@@ -13,7 +13,10 @@ const loginGET = (req, res) => {
             type: 'error'
         };
         res.clearCookie('flash');
-        res.render('login', { title: 'Logg Inn' })
+        res.render('login', { 
+            title: 'Logg Inn',
+            bruker: null
+        })
     } catch (error) {
         console.log(error)
     }

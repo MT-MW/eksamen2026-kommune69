@@ -52,7 +52,7 @@
         </form>
     <% } %>
 
-    <% if(hendelse.status !== 'arkivert' && isAllowed ) { %>
+    <% if(hendelse.status !== 'arkivert' && isAdmin ) { %>
         <form action="/oppdater-hendelse/<%= hendelse._id %>" method="post">
                     <input name="status" type="hidden" value="arkivert">
             <button class="actionButton" type="submit"><h3>Arkiver hendelse</h3></button>

@@ -4,9 +4,13 @@
 <h1 class="profileWelcome">Alle brukere:</h1>
 
 <div>
-    <% brukere.forEach(bruker => { %>
-        <%- include('./partials/userPreview.ejs', { bruker }) %>
-    <% }); %>    
+    <% if(brukere.length > 0 ) { %>
+        <% brukere.forEach(bruker => { %>
+            <%- include('./partials/userPreview.ejs', { bruker }) %>
+        <% }); %> 
+    <% } else { %>
+        <p>Ser ut som at vi ikke har noe data å vise her akkurat nå.</p>
+    <% } %>
 </div>
 
 
